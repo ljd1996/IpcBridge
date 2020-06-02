@@ -11,29 +11,29 @@ import java.lang.Exception
 object IpcBridge {
     const val TAG = "IpcBridge"
 
-    private val mClassConfig = mutableMapOf<Class<*>, Class<*>>()
-    private val mInstanceConfig = mutableMapOf<Class<*>, Any>()
+    private val mClassMap = mutableMapOf<Class<*>, Class<*>>()
+    private val mInstanceMap = mutableMapOf<Class<*>, Any>()
     private val mProxyCache = mutableMapOf<Class<*>, Any>()
 
     private var mBridgeInterface: IBridgeInterface? = null
 
     fun register(inter: Class<*>, impl: Class<*>) {
-        mClassConfig[inter] = impl
+        mClassMap[inter] = impl
     }
 
     fun register(inter: Class<Any>, instance: Any) {
-        mInstanceConfig[inter] = instance
+        mInstanceMap[inter] = instance
     }
 
     fun getInstance(inter: Class<*>): Any? {
-        if (mInstanceConfig.containsKey(inter)) {
-            return mInstanceConfig[inter]
-        } else if (mClassConfig.containsKey(inter)) {
-            val clazz = mClassConfig[inter]
+        if (mInstanceMap.containsKey(inter)) {
+            return mInstanceMap[inter]
+        } else if (mClassMap.containsKey(inter)) {
+            val clazz = mClassMap[inter]
             clazz?.let {
                 val o = it.newInstance()
                 if (inter.isInstance(o)) {
-                    mInstanceConfig[inter] = o
+                    mInstanceMap[inter] = o
                     return o
                 }
             }

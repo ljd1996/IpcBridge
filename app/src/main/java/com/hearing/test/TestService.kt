@@ -4,6 +4,8 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import com.hearing.ipcbridge.IpcBridge
+import com.hearing.test.api.BridgeApiImpl
+import com.hearing.test.api.IBridgeApi
 
 /**
  * @author liujiadong
