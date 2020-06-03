@@ -12,24 +12,17 @@ import com.hearing.ipcbridge.IpcBridge.TAG
  * @author liujiadong
  * @since 2020/6/1
  */
-internal class BridgeProvider : ContentProvider() {
-
-    companion object {
-        const val AUTHORITY = "com.hearing.ipcbridge.provider"
-        const val SERVICE_IPC = "ipc"
-    }
+open class BaseProvider : ContentProvider() {
 
     override fun onCreate(): Boolean {
         return false
     }
 
-    override fun query(uri: Uri, projection: Array<out String>?, selection: String?, selectionArgs: Array<out String>?, sortOrder: String?): Cursor? {
-        if (selectionArgs == null || selectionArgs.isEmpty()) {
-            return null
-        }
-        return if (selectionArgs[0] == SERVICE_IPC) {
-            BinderCursor(arrayOf("service"), BridgeBinder())
-        } else null
+    override fun query(
+        uri: Uri, projection: Array<out String>?, selection: String?,
+        selectionArgs: Array<out String>?, sortOrder: String?
+    ): Cursor? {
+        return BinderCursor(arrayOf("service"), BridgeBinder())
     }
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {

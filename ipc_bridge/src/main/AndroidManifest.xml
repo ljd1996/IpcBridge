@@ -1,12 +1,3 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hearing.ipcbridge">
-
-    <application>
-        <provider
-            android:name="com.hearing.ipcbridge.BridgeProvider"
-            android:authorities="com.hearing.ipcbridge.provider"
-            android:grantUriPermissions="true"
-            android:process=":bridge"
-            android:exported="false" />
-    </application>
 </manifest>

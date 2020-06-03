@@ -19,7 +19,7 @@
 
         <service
             android:name=".TestService"
-            android:process=":bridge" />
+            android:process=":test" />
     </application>
 
 </manifest>

@@ -1,0 +1,17 @@
+plugins {
+    id 'groovy'
+}
+
+repositories {
+    google()
+    jcenter()
+    mavenCentral()
+    maven { url 'D:\\Workspace\\Android\\IpcBridge\\maven' }
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation 'com.hearing.ipcbridge:ipc_bridge:1.0.0'
+    implementation 'org.javassist:javassist:3.27.0-GA'
+}

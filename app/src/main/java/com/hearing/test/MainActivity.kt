@@ -18,7 +18,8 @@ class MainActivity : AppCompatActivity() {
             bundle.putInt("id", 100)
             val proxy = IpcBridge.getProxy(
                 this,
-                IBridgeApi::class.java
+                IBridgeApi::class.java,
+                "com.hearing.ipcbridge.test"
             ) as? IBridgeApi
             val result = proxy?.getName(bundle)
             Log.d("Bridge", "name = ${result?.getString("name")}")

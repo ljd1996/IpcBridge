@@ -41,17 +41,18 @@ object IpcBridge {
         return null
     }
 
-    fun getProxy(context: Context, inter: Class<*>): Any? {
+    fun getProxy(context: Context, inter: Class<*>, authority: String): Any? {
         if (mProxyCache.containsKey(inter)) {
-            return mProxyCache[inter] ?: newProxy(context, inter)
+            return mProxyCache[inter] ?: newProxy(context, inter, authority)
         }
-        return newProxy(context, inter)
+        return newProxy(context, inter, authority)
     }
 
-    private fun newProxy(context: Context, inter: Class<*>): Any? {
+    private fun newProxy(context: Context, inter: Class<*>, authority: String): Any? {
         if (mBridgeInterface == null) {
-            val cursor = context.contentResolver?.query(Uri.parse("content://${BridgeProvider.AUTHORITY}"),
-                    null, null, arrayOf(BridgeProvider.SERVICE_IPC), null)
+            val cursor = context.contentResolver?.query(
+                Uri.parse("content://${authority}"), null, null, null, null
+            )
             cursor?.let {
                 val binder = BinderCursor.getBinder(it)
                 try {
