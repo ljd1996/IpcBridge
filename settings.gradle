@@ -1,3 +1,4 @@
 rootProject.name='IpcBridge'
 include ':app'
 include ':ipc_bridge'
+include ':ipc_bridge_gradle'
