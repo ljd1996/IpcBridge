@@ -15,10 +15,7 @@ class TestService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        IpcBridge.register(
-            IBridgeApi::class.java,
-            BridgeApiImpl::class.java
-        )
+        IpcBridge.register(IBridgeApi::class.java, BridgeApiImpl::class.java)
     }
 
     override fun onBind(intent: Intent?): IBinder? {

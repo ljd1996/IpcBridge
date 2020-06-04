@@ -1,0 +1,36 @@
+apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'maven'
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties')
+        .newDataInputStream())
+
+// publish to bintray
+publish {
+    userOrg = 'ljd1997'
+    groupId = 'com.hearing.gradle'
+    artifactId = 'ipcbridge'
+    uploadName = 'com.hearing.gradle:ipcbridge'
+    publishVersion = '1.0.0'
+    desc = 'IpcBridge for Android'
+    website = 'https://github.com/ljd1996/IpcBridge'
+    bintrayUser = "${properties.get('bintray.user')}"
+    bintrayKey = "${properties.get('bintray.apikey')}"
+    dryRun = false
+}
+
+// publish to local
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            pom.groupId = 'com.hearing.gradle'
+            pom.artifactId = 'ipcbridge'
+            pom.version = '1.0.0'
+            repository(url: uri('../maven'))
+        }
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
