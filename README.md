@@ -4,6 +4,7 @@
 
 - 通过一个AIDL文件实现通用跨进程调用，避免每个IPC接口都需要新建对应的AIDL文件；
 - 通过应用ipcbridge的gradle插件，可以通过配置不同进程的信息，从而避免使用Service绑定传递Binder；
+- 通过直接注册创建Java/Kotlin接口来进行进程间的接口调用。
 
 ## 使用
 
@@ -103,7 +104,7 @@ interface IBridgeInterface {
 }
 ```
 
-在A进程中通过获取对应接口的代理类，代理类会通过ContentProvider&Binder的方式拿到B进程的Binder对象：
+在A进程中通过获取对应接口的代理类，代理类会通过ContentProvider&Binder的方式拿到B进程的Binder对象（不需要使用bindService的方式）：
 
 ```kotlin
 fun getProxy(context: Context, inter: Class<*>, authority: String): Any? {
@@ -155,3 +156,5 @@ override fun invoke(proxy: Any?, method: Method?, args: Array<out Any>?): Any? {
 IpcBridge在配置上还有些麻烦，后面有时间会考虑优化一下，争取实现最少配置。
 
 本人博客：[苍耳的博客](https://ljd1996.github.io)。
+
+相关文章：[Android-IPC机制-ContentProvider](https://ljd1996.github.io/2020/01/06/Android-IPC%E6%9C%BA%E5%88%B6/#ContentProvider-amp-Binder)。
