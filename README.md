@@ -94,6 +94,8 @@ val result = proxy?.getName(bundle)
 
 ## 原理
 
+具体原理解析见博客：[Android-IpcBridge原理](https://ljd1996.github.io/2020/06/04/Android-IpcBridge%E5%8E%9F%E7%90%86/#more)。
+
 项目工程中包括三个模块，一个是IpcBridge的Kotlin源代码，一个是IpcBridge的Gradle插件源码，主模块是demo模块。
 
 主要是通过一个AIDL接口，借助Bundle的特性，用来传递要调用的类和方法名，接下来用A进程表示调用进程，B进程表示被调用进程：
@@ -153,8 +155,10 @@ override fun invoke(proxy: Any?, method: Method?, args: Array<out Any>?): Any? {
 
 ## 后续
 
-IpcBridge在配置上还有些麻烦，后面有时间会考虑优化一下，争取实现最少配置。
+IpcBridge在配置上还有些麻烦，后面有时间会考虑优化一下，争取实现最少配置，同时优化下代码。
 
-本人博客：[苍耳的博客](https://ljd1996.github.io)。
+本人刚参加工作的菜鸡一只，有兴趣的同学可以互相交流，欢迎！
+
+博客链接：[苍耳的博客](https://ljd1996.github.io)。
 
 相关文章：[Android-IPC机制-ContentProvider](https://ljd1996.github.io/2020/01/06/Android-IPC%E6%9C%BA%E5%88%B6/#ContentProvider-amp-Binder)。

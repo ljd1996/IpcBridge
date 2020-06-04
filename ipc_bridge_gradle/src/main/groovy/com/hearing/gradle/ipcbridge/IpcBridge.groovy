@@ -46,6 +46,7 @@ class IpcBridge implements Plugin<Project> {
     private void doAfterEvaluate() {
         project.android.applicationVariants.all { variant ->
             String variantName = variant.name.capitalize()
+            println(">>>variantName = $variantName")
             def processManifestTask = project.tasks.getByName("process${variantName}Manifest")
 
             processManifestTask.doLast { pmt ->
